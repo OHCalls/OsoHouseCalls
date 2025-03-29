@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oso House Calls</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="site-1styles/main.css">
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS with your public key
+        emailjs.init('GuVV86HxBVUNrNlVR');
+    </script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Welcome to Oso House Calls</h1>
+        <p>Your trusted home maintenance and repair experts.</p>
+    </section>
+
+    <!-- Example Image -->
+    <img src="site-1images/placeholder-tools.jpg" alt="Tools">
+
+    <!-- Contact Form -->
+    <section class="contact" id="contact">
+        <h2>Contact Us</h2>
+        <form id="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required><br><br>
+            <input type="email" name="email" placeholder="Your Email" required><br><br>
+            <textarea name="message" placeholder="Your Message" required></textarea><br><br>
+            <button type="submit">Send</button>
+        </form>
+        <p id="form-status" style="display: none;">Message sent successfully!</p>
+    </section>
+
+    <!-- JavaScript -->
+    <script>
+        // Handle form submission
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Collect form data
+            const formData = new FormData(this);
+            const data = {
+                name: formData.get('name'),
+                email: formData.get('email'),
+                message: formData.get('message'),
+            };
+
+            // Send email using EmailJS
+            emailjs.send("service_hxyy", "template_h7z5ecj", data)
+                .then(function(response) {
+                    console.log('SUCCESS!', response.status, response.text);
+                    document.getElementById('form-status').style.display = 'block';
+                }, function(error) {
+                    console.error('FAILED...', error);
+                    alert('Failed to send message. Please try again later.');
+                });
+        });
+    </script>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
